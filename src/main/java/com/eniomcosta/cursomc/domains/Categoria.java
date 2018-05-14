@@ -1,4 +1,4 @@
-package com.eniomcosta.cursomc.domain;
+package com.eniomcosta.cursomc.domains;
 
 import java.io.Serializable;
 
