@@ -10,27 +10,28 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.eniomcosta.cursomc.domains.Categoria;
+import com.eniomcosta.cursomc.domains.Produto;
 import com.eniomcosta.cursomc.services.CategoriaService;
-import com.eniomcosta.cursomc.services.exception.ObjectNotFoundException;
+import com.eniomcosta.cursomc.services.ProdutoService;
 
 @RestController
-@RequestMapping(value="/categorias")
-public class CategoriaResource {
+@RequestMapping(value="/produtos")
+public class ProdutoResource {
 	
 	@Autowired
-	private CategoriaService service;
+	private ProdutoService service;
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 		
-		Categoria obj = service.buscar(id);
+		Produto obj = service.buscar(id);
 		return ResponseEntity.ok(obj);
 		
 	}
 	
 	@RequestMapping(value="/all",method=RequestMethod.GET)
 	public ResponseEntity<?> findAll(){
-		List<Categoria> obj = service.findAll();
+		List<Produto> obj = service.findAll();
 		
 		return ResponseEntity.ok(obj);
 		
