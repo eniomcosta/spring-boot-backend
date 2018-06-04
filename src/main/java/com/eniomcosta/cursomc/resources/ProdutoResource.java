@@ -29,7 +29,7 @@ public class ProdutoResource {
 		
 	}
 	
-	@RequestMapping(value="/all",method=RequestMethod.GET)
+	@RequestMapping(value="/",method=RequestMethod.GET)
 	public ResponseEntity<?> findAll(){
 		List<Produto> obj = service.findAll();
 		

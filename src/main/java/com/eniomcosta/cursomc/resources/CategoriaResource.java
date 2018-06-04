@@ -28,7 +28,7 @@ public class CategoriaResource {
 		
 	}
 	
-	@RequestMapping(value="/all",method=RequestMethod.GET)
+	@RequestMapping(value="/",method=RequestMethod.GET)
 	public ResponseEntity<?> findAll(){
 		List<Categoria> obj = service.findAll();
 		
