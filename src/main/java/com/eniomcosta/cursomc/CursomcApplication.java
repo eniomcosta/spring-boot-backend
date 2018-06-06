@@ -13,6 +13,7 @@ import com.eniomcosta.cursomc.domains.Cidade;
 import com.eniomcosta.cursomc.domains.Cliente;
 import com.eniomcosta.cursomc.domains.Endereco;
 import com.eniomcosta.cursomc.domains.Estado;
+import com.eniomcosta.cursomc.domains.ItemPedido;
 import com.eniomcosta.cursomc.domains.Pagamento;
 import com.eniomcosta.cursomc.domains.PagamentoBoleto;
 import com.eniomcosta.cursomc.domains.PagamentoCartao;
@@ -25,6 +26,7 @@ import com.eniomcosta.cursomc.repositories.CidadeRepository;
 import com.eniomcosta.cursomc.repositories.ClienteRepository;
 import com.eniomcosta.cursomc.repositories.EnderecoRepository;
 import com.eniomcosta.cursomc.repositories.EstadoRepository;
+import com.eniomcosta.cursomc.repositories.ItemPedidoRepository;
 import com.eniomcosta.cursomc.repositories.PagamentoRepository;
 import com.eniomcosta.cursomc.repositories.PedidoRepository;
 import com.eniomcosta.cursomc.repositories.ProdutoRepository;
@@ -55,6 +57,9 @@ public class CursomcApplication implements CommandLineRunner {
 	
 	@Autowired
 	private PagamentoRepository pagamentoRepo;
+	
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepo;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
@@ -134,6 +139,23 @@ public class CursomcApplication implements CommandLineRunner {
 		pagamentoRepo.saveAll(Arrays.asList(pagt1,pagt2));
 		
 		/** FIM PEDIDOS E PAGAMENTOS */
+		
+		/** INICIO ITEMPEDIDO */
+		
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 2000.00);
+		ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 2, 80.00);
+		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00, 1, 800.00);
+		
+		ped1.getItens().addAll(Arrays.asList(ip1,ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+		
+		p1.getItens().addAll(Arrays.asList(ip1));
+		p2.getItens().addAll(Arrays.asList(ip3));
+		p3.getItens().addAll(Arrays.asList(ip2));
+		
+		itemPedidoRepo.saveAll(Arrays.asList(ip1,ip2,ip3));
+		
+		/** FIM ITEMPEDIDO */
 		
 	}
 	
