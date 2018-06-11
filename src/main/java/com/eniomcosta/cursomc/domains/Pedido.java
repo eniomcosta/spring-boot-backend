@@ -15,31 +15,38 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
-public class Pedido implements Serializable{
+public class Pedido implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
+	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date instante;
-	
-	@OneToOne(cascade=CascadeType.ALL, mappedBy="pedido")
+
+	@JsonManagedReference
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
 	private Pagamento pagamento;
-	
+
+	@JsonManagedReference
 	@ManyToOne
-	@JoinColumn(name="cliente_id")
+	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
-	
+
 	@ManyToOne
-	@JoinColumn(name="endereco_entrega_id")
+	@JoinColumn(name = "endereco_entrega_id")
 	private Endereco enderecoEntrega;
-	
-	@OneToMany(mappedBy="id.pedido")
+
+	@OneToMany(mappedBy = "id.pedido")
 	private Set<ItemPedido> itens = new HashSet<>();
-	
-	public Pedido () {
-		
+
+	public Pedido() {
+
 	}
 
 	public Pedido(Integer id, Date instante, Cliente cliente, Endereco enderecoEntrega) {
@@ -89,7 +96,7 @@ public class Pedido implements Serializable{
 	public void setEnderecoEntrega(Endereco enderecoEntrega) {
 		this.enderecoEntrega = enderecoEntrega;
 	}
-	
+
 	public Set<ItemPedido> getItens() {
 		return itens;
 	}
@@ -122,5 +129,5 @@ public class Pedido implements Serializable{
 			return false;
 		return true;
 	}
-	
+
 }
