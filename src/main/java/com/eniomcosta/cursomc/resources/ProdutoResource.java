@@ -22,15 +22,15 @@ public class ProdutoResource {
 	private ProdutoService service;
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
+	public ResponseEntity<Produto> find(@PathVariable Integer id) {
 		
-		Produto obj = service.buscar(id);
+		Produto obj = service.find(id);
 		return ResponseEntity.ok(obj);
 		
 	}
 	
 	@RequestMapping(value="/",method=RequestMethod.GET)
-	public ResponseEntity<?> findAll(){
+	public ResponseEntity<List<Produto>> findAll(){
 		List<Produto> obj = service.findAll();
 		
 		return ResponseEntity.ok(obj);
