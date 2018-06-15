@@ -11,5 +11,9 @@ public class DataIntegrityException extends RuntimeException{
 	public DataIntegrityException(String msg, Throwable cause) {
 		super(msg,cause);
 	}
+	
+	public DataIntegrityException(Object obj, Throwable cause) {
+		super("Não foi possível remover. O registro possui entidades associadas. Entidade: " + obj.getClass().getSimpleName(), cause);
+	}
 
 }
